@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Prep! — Software de operaciones para restaurantes que ya superaron Excel</title>
-<meta name="description" content="POS, cocina, reservas e inventario en un solo sistema. Hecho por operadores en Lima, para cadenas de restaurantes en LATAM." />
+<title>Prep! — Software de operaciones para restaurantes</title>
+<meta name="description" content="Software de reservas, operación, venta y fidelización para restaurantes pequeños y grandes. Hecho por operadores internacionales." />
 
 <!-- Open Graph / Social Sharing -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Prep! — Software de operaciones para restaurantes" />
-<meta property="og:description" content="POS, cocina, reservas e inventario en un solo sistema. Hecho por operadores en Lima, para cadenas de restaurantes en LATAM." />
+<meta property="og:description" content="Software de reservas, operación, venta y fidelización para restaurantes pequeños y grandes. Hecho por operadores internacionales." />
 <meta property="og:url" content="https://prep.rest" />
 <meta property="og:site_name" content="Prep!" />
 <meta property="og:locale" content="es_PE" />
@@ -20,7 +20,7 @@
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Prep! — Software de operaciones para restaurantes" />
-<meta name="twitter:description" content="POS, cocina, reservas e inventario en un solo sistema. Hecho por operadores en Lima." />
+<meta name="twitter:description" content="Software de reservas, operación, venta y fidelización. Hecho por operadores internacionales." />
 <meta name="twitter:image" content="https://prep.rest/og-image.png" />
 
 <!-- Favicon SVG inline (escala a cualquier tamaño sin pixelar) -->
@@ -260,7 +260,7 @@
   .marquee-track {
     display: flex;
     gap: 4rem;
-    animation: scroll-left 22s linear infinite;
+    animation: scroll-left 14s linear infinite;
     white-space: nowrap;
   }
   @keyframes scroll-left {
@@ -398,6 +398,46 @@
   .stagger > * { transition-delay: var(--stagger-delay, 0ms); }
   .rotate-tag { transform: rotate(-3deg); display: inline-block; }
   .rotate-tag-r { transform: rotate(2deg); display: inline-block; }
+
+  /* ============================================
+     LANG TOGGLE
+     ============================================ */
+  .lang-toggle {
+    display: inline-flex; border: 2px solid #000; border-radius: 9999px; overflow: hidden;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .lang-toggle button {
+    padding: 4px 12px; background: transparent; border: none; cursor: pointer;
+    transition: all 0.2s ease; color: #171c20;
+  }
+  .lang-toggle button.active { background: #1e5af9; color: #fff; }
+  .lang-toggle button:not(.active):hover { background: #d6e2ff; }
+
+  /* ============================================
+     SOCIAL ICONS
+     ============================================ */
+  .social-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border: 2px solid #000; border-radius: 9999px;
+    background: #fff; box-shadow: 3px 3px 0 0 #000;
+    transition: all 0.15s ease; color: #171c20; text-decoration: none;
+  }
+  .social-link:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 0 #000; background: #ffcc00; }
+
+  /* ============================================
+     SUPPORT BADGE (24h)
+     ============================================ */
+  .support-badge {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    background: #1e5af9; color: #fff; border: 2px solid #000;
+    border-radius: 9999px; padding: 12px 20px;
+    box-shadow: 6px 6px 0 0 #000; cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 700;
+    transition: all 0.15s ease; text-decoration: none;
+  }
+  .support-badge:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 0 #000; }
 </style>
 </head>
 <body class="font-sans bg-background text-ink">
@@ -428,6 +468,10 @@
       <a href="#fundador" class="hover:text-primary transition">Quién lo hizo</a>
     </div>
     <div class="flex items-center gap-3">
+      <div class="lang-toggle hidden md:inline-flex">
+        <button class="active" onclick="setLang('es')">ES</button>
+        <button onclick="setLang('en')">EN</button>
+      </div>
       <button onclick="document.getElementById('demo-form').scrollIntoView({behavior:'smooth'})" class="bg-tertiary btn-brutal px-5 py-2 text-sm">
         Pedir demo
       </button>
@@ -447,7 +491,7 @@
       <div class="inline-flex items-center gap-2 bg-white brutal-sm rounded-full px-4 py-2 mb-6">
         <span class="dot-atom"></span>
         <span class="text-[11px] font-bold tracking-[0.18em] uppercase font-mono">
-          Software de cocina · Hecho por operadores · Lima 2026
+          Software de cocina · Hecho por operadores
         </span>
       </div>
 
@@ -464,10 +508,9 @@
       </h1>
 
       <!-- Sub-copy -->
-      <p class="text-base md:text-lg text-ink/80 max-w-xl mb-6 border-l-4 border-primary pl-5 leading-relaxed">
-        Software de operaciones para cadenas de restaurantes que ya superaron Excel.
-        <strong>POS, cocina, reservas, inventario y caja chica</strong> — todo conectado.
-        Hecho por operadores latinoamericanos, para latinoamericanos.
+      <p class="text-base md:text-lg text-ink/80 max-w-xl mb-8 border-l-4 border-primary pl-5 leading-relaxed">
+        Software de reservas, operación, venta y fidelización para restaurantes pequeños y grandes.
+        <strong>Hecho por operadores internacionales</strong> para cualquier negocio gastronómico.
       </p>
 
       <!-- CTAs -->
@@ -475,14 +518,14 @@
         <button onclick="document.getElementById('demo-form').scrollIntoView({behavior:'smooth'})" class="bg-secondary text-white btn-brutal px-8 py-4 text-lg">
           Pedir demo &nbsp;→
         </button>
-        <button onclick="document.getElementById('modulos').scrollIntoView({behavior:'smooth'})" class="bg-white text-ink btn-brutal px-8 py-4 text-lg">
-          Ver cómo funciona el Pase
+        <button onclick="document.getElementById('modulos').scrollIntoView({behavior:'smooth'})" class="bg-white text-ink btn-brutal px-8 py-4 text-lg flex items-center gap-2">
+          <span class="material-symbols-outlined">play_circle</span> Ver los 13 módulos
         </button>
       </div>
 
       <!-- Trust line -->
       <p class="mt-6 text-xs md:text-sm text-ink/60 font-mono">
-        ① SUNAT nativo &nbsp; ② 0% fee en reservas &nbsp; ③ Multi-sede de verdad &nbsp; ④ En castellano, no traducido
+        ① Facturación electrónica nativa &nbsp; ② 0% fee en reservas &nbsp; ③ Multi-sede de verdad &nbsp; ④ Plug and play
       </p>
     </div>
 
@@ -570,8 +613,8 @@
      ============================================ -->
 <section class="bg-ink py-3 border-y-4 border-black overflow-hidden relative z-20">
   <div class="marquee-track text-tertiary">
-    <span>¡Va!  &middot;  ¡Oído!  &middot;  ¡Servido!  &middot;  ¡Atrás!  &middot;  ¡Fuego!  &middot;  ¡Mise!  &middot;  ¡Prep!  &middot;  ¡Cubierto!  &middot;  ¡Brigada!  &middot;  ¡Línea!  &middot;  ¡Mercado!  &middot;  ¡Vuelto!  &middot; </span>
-    <span aria-hidden="true">¡Va!  &middot;  ¡Oído!  &middot;  ¡Servido!  &middot;  ¡Atrás!  &middot;  ¡Fuego!  &middot;  ¡Mise!  &middot;  ¡Prep!  &middot;  ¡Cubierto!  &middot;  ¡Brigada!  &middot;  ¡Línea!  &middot;  ¡Mercado!  &middot;  ¡Vuelto!  &middot; </span>
+    <span>¡Va!  &middot;  ¡Oído!  &middot;  ¡Servido!  &middot;  ¡Atrás!  &middot;  ¡Fuego!  &middot;  ¡Mise!  &middot;  ¡Prep!  &middot;  ¡Cubierto!  &middot;  ¡Brigada!  &middot;  ¡Línea!  &middot;  ¡Mercado!  &middot;  ¡Vuelto!  &middot;  ¡Marcha!  &middot;  ¡Out Chef!  &middot;  ¡Heard!  &middot;  ¡Vamos!  &middot; </span>
+    <span aria-hidden="true">¡Va!  &middot;  ¡Oído!  &middot;  ¡Servido!  &middot;  ¡Atrás!  &middot;  ¡Fuego!  &middot;  ¡Mise!  &middot;  ¡Prep!  &middot;  ¡Cubierto!  &middot;  ¡Brigada!  &middot;  ¡Línea!  &middot;  ¡Mercado!  &middot;  ¡Vuelto!  &middot;  ¡Marcha!  &middot;  ¡Out Chef!  &middot;  ¡Heard!  &middot;  ¡Vamos!  &middot; </span>
   </div>
 </section>
 
@@ -585,11 +628,11 @@
     <p class="text-xs font-bold tracking-[0.2em] uppercase font-mono text-secondary mb-4">02 — Lo que hace Prep!</p>
     <h2 class="display text-4xl md:text-6xl mb-4">
       Trece módulos.
-      <span class="bg-primary text-white px-3 rotate-tag-r border-2 border-black inline-block">Una sola caja.</span>
+      <span class="bg-primary text-white px-3 rotate-tag-r border-2 border-black inline-block">Un solo sistema.</span>
     </h2>
     <p class="text-base md:text-lg text-ink/70 max-w-2xl leading-relaxed">
-      Siete se llaman como se habla en cocina. Seis más cubren lo que ningún otro sistema
-      de LATAM tiene conectado. Todos hablan entre sí desde el primer día.
+      Hablamos un mismo lenguaje y 6 de 13 módulos cubren lo que ningún otro sistema
+      tiene conectado. Todos hablan entre sí desde el primer día.
     </p>
   </div>
 
@@ -612,17 +655,17 @@
       </ul>
     </div>
 
-    <!-- 02. CAJA -->
+    <!-- 02. POS -->
     <div class="brutal bg-tertiary text-ink rounded-xl-card p-7 module-card" data-module-index="1">
       <div class="flex justify-between items-start mb-5">
         <span class="material-symbols-outlined icon-filled text-4xl">point_of_sale</span>
         <span class="font-mono text-[10px] font-bold tracking-wider opacity-50">02</span>
       </div>
-      <h3 class="display text-4xl mb-2">Caja</h3>
-      <p class="text-xs font-bold tracking-widest uppercase mb-4 opacity-60 font-mono">POS con SUNAT nativo</p>
+      <h3 class="display text-4xl mb-2">POS</h3>
+      <p class="text-xs font-bold tracking-widest uppercase mb-4 opacity-60 font-mono">Punto de venta · Facturación nativa</p>
       <ul class="space-y-2">
         <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Floor plan editable, open tabs, split bills por mesa</li>
-        <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Boleta, factura, Yape, Plin, Izipay — SUNAT desde el primer ticket</li>
+        <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Boleta, factura y medios de pago integrados desde el primer ticket</li>
         <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> QR en mesa para que el comensal pida desde su celular</li>
         <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Propinas capturadas y dirigidas a RRHH automáticamente</li>
       </ul>
@@ -644,13 +687,13 @@
       </ul>
     </div>
 
-    <!-- 04. MESA -->
+    <!-- 04. BIENVENIDA -->
     <div class="brutal bg-white rounded-xl-card p-7 module-card" data-module-index="3">
       <div class="flex justify-between items-start mb-5">
         <span class="material-symbols-outlined icon-filled text-4xl text-primary">event_seat</span>
         <span class="font-mono text-[10px] font-bold tracking-wider text-ink/40">04</span>
       </div>
-      <h3 class="display text-4xl mb-2 text-ink">Mesa</h3>
+      <h3 class="display text-4xl mb-2 text-ink">Bienvenida</h3>
       <p class="text-xs font-bold tracking-widest uppercase mb-4 text-ink/50 font-mono">Reservas · 0% comisión siempre</p>
       <ul class="space-y-2">
         <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Ficha del comensal: historial, VIP, alergias, preferencias</li>
@@ -704,7 +747,7 @@
         <li class="text-sm opacity-90 flex gap-2"><span class="opacity-50 shrink-0">→</span> Ficha de empleado con registro de "The Talk" por colaborador</li>
         <li class="text-sm opacity-90 flex gap-2"><span class="opacity-50 shrink-0">→</span> Planilla de nómina generada en un clic</li>
         <li class="text-sm opacity-90 flex gap-2"><span class="opacity-50 shrink-0">→</span> Shift scheduling con swap online entre empleados</li>
-        <li class="text-sm opacity-90 flex gap-2"><span class="opacity-50 shrink-0">→</span> Tip pooling automático desde Caja a planilla</li>
+        <li class="text-sm opacity-90 flex gap-2"><span class="opacity-50 shrink-0">→</span> Tip pooling automático desde POS a planilla</li>
       </ul>
     </div>
 
@@ -718,7 +761,7 @@
       <p class="text-xs font-bold tracking-widest uppercase mb-4 opacity-60 font-mono">Marketplace propio · 0% fee</p>
       <ul class="space-y-2">
         <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Pedidos de delivery con KDS dedicado sin mezclar con salón</li>
-        <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Marketplace propio en tu web: sin Rappi, sin PedidosYa</li>
+        <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Marketplace propio en tu web: sin depender de agregadores</li>
         <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> 0% de comisión por pedido. Siempre.</li>
         <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Dark kitchen multi-marca desde una sola cocina</li>
       </ul>
@@ -731,11 +774,11 @@
         <span class="font-mono text-[10px] font-bold tracking-wider text-ink/40">09</span>
       </div>
       <h3 class="display text-4xl mb-2 text-ink">Contabilidad</h3>
-      <p class="text-xs font-bold tracking-widest uppercase mb-4 text-ink/50 font-mono">Tributario · SUNAT automatizado</p>
+      <p class="text-xs font-bold tracking-widest uppercase mb-4 text-ink/50 font-mono">Tributario · Facturación automatizada</p>
       <ul class="space-y-2">
         <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Facturas generadas automáticamente desde Mercado</li>
-        <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Conexión nativa con ContaFácil y Nubefact</li>
-        <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Libro de ventas pre-armado para declaración SUNAT</li>
+        <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Conexión nativa con sistemas de facturación electrónica</li>
+        <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Libro de ventas pre-armado para declaraciones tributarias</li>
         <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Cierre mensual sin tocar Excel ni llamar al contador</li>
       </ul>
     </div>
@@ -806,14 +849,22 @@
 
   </div>
 
-  <!-- Nota al pie de módulos -->
-  <div class="mt-10 flex items-start gap-4 max-w-2xl reveal">
-    <span class="material-symbols-outlined text-secondary text-2xl shrink-0 mt-0.5">info</span>
-    <p class="text-sm text-ink/60 leading-relaxed">
-      Todos los módulos comparten una base de datos única. Lo que entra en <strong>Caja</strong> actualiza
-      <strong>Mercado</strong>. Lo que compras en <strong>Mercado</strong> alimenta <strong>Recetas</strong>.
-      Lo que calcula <strong>RRHH</strong> baja a <strong>Directorio</strong>. Sin exportar, sin importar, sin duplicar.
-    </p>
+  <!-- Nota al pie de módulos — DESTACADA -->
+  <div class="mt-10 bg-tertiary border-3 border-black rounded-xl-card p-6 md:p-8 max-w-3xl mx-auto" style="border-width:3px; box-shadow: 8px 8px 0 0 #000;">
+    <div class="flex items-start gap-4">
+      <span class="material-symbols-outlined text-secondary text-3xl shrink-0 mt-0.5">hub</span>
+      <div>
+        <p class="font-mono text-xs font-bold tracking-widest uppercase mb-2">Plug and play · Todo conectado desde el día uno</p>
+        <p class="text-sm text-ink/80 leading-relaxed">
+          Todos los módulos comparten una base de datos única. Lo que entra en <strong>POS</strong> actualiza
+          <strong>Mercado</strong>. Lo que compras en <strong>Mercado</strong> alimenta <strong>Recetas</strong>.
+          Lo que calcula <strong>RRHH</strong> baja a <strong>Directorio</strong>. Sin exportar, sin importar, sin duplicar.
+        </p>
+        <p class="text-sm text-ink/80 leading-relaxed mt-2 font-semibold">
+          Informes a la medida con asistencia humana — lo que la competencia no tiene.
+        </p>
+      </div>
+    </div>
   </div>
 
 </section>
@@ -827,7 +878,7 @@
     <div class="mb-16 reveal">
       <p class="text-xs font-bold tracking-[0.2em] uppercase font-mono text-tertiary mb-4">03 — Por qué Prep! y no otra</p>
       <h2 class="display text-5xl md:text-7xl mb-4">
-        Toast vende
+        Otros venden
         <span class="bg-secondary text-white px-3 rotate-tag border-2 border-white inline-block">software.</span>
       </h2>
       <h2 class="display text-5xl md:text-7xl">
@@ -841,12 +892,11 @@
       <div class="reveal">
         <div class="flex items-baseline gap-4 mb-3">
           <span class="display text-5xl text-tertiary">01</span>
-          <h3 class="display text-2xl md:text-3xl">SUNAT nativo, no parche</h3>
+          <h3 class="display text-2xl md:text-3xl">Facturación electrónica nativa</h3>
         </div>
         <p class="text-white/75 text-lg leading-relaxed pl-16">
-          Toast y Square no saben qué es una boleta electrónica peruana.
-          Restaurant.pe sí, pero no escala a la cadena que quieres ser en 3 años.
-          Prep! nació en Lima.
+          Otros sistemas no entienden la facturación local de cada país.
+          Prep! se adapta a la regulación tributaria de tu mercado desde el primer ticket.
         </p>
       </div>
 
@@ -869,7 +919,7 @@
           <h3 class="display text-2xl md:text-3xl">Multi-sede de verdad</h3>
         </div>
         <p class="text-white/75 text-lg leading-relaxed pl-16">
-          Si tienes 6 sedes, comparas. Si tienes 12, optimizás. Prep! fue diseñado
+          Si tienes 6 sedes, comparas. Si tienes 12, optimizas. Prep! fue diseñado
           para cadenas desde la primera línea de código, no parchado después.
         </p>
       </div>
@@ -899,22 +949,18 @@
     <div class="lg:col-span-5 reveal">
       <p class="text-xs font-bold tracking-[0.2em] uppercase font-mono text-secondary mb-4">04 — Quién lo hizo</p>
       <h2 class="display text-5xl md:text-6xl mb-6">
-        Lo hizo
-        <span class="bg-primary text-white px-3 rotate-tag border-2 border-black inline-block">alguien que estuvo</span>
-        en la línea.
+        Lo hicimos
+        <span class="bg-primary text-white px-3 rotate-tag border-2 border-black inline-block">desde la cocina.</span>
       </h2>
 
       <p class="text-lg text-ink/80 leading-relaxed mb-6">
-        Francisco Barrientos. Fundador de Evolving Hospitality. 15 años escribiendo
-        manuales operatitú para restaurantes y hoteles. Yumcha. Una franquicia
-        hamburguesera con 2,877 párrafos de manual operativo. Columnista de
-        La República en CX y operación.
+        Pensamos tanto en la funcionalidad y arquitectura del sistema que teníamos que
+        equipararlo a nivel de experiencia de usuario y nos dio tiempo de divertirnos
+        con el diseño. Disfrútalo.
       </p>
 
       <p class="text-lg text-ink/80 leading-relaxed mb-8">
-        Una verdad quedó clara en esos 15 años: <strong>el software de restaurantes
-        lo construyen programadores que no estuvieron nunca en una línea.</strong>
-        Por eso Prep! se construye desde el otro lado.
+        <strong>No es solo un software para restaurantes, es un operador completo.</strong>
       </p>
 
       <blockquote class="border-l-4 border-secondary pl-5 italic text-xl text-ink leading-snug">
@@ -925,35 +971,35 @@
     <div class="lg:col-span-7 reveal" style="--stagger-delay: 160ms;">
       <div class="tilt-wrap">
         <div class="tilt-inner brutal bg-tertiary rounded-xl-card p-8 md:p-10 -rotate-1">
-          <p class="font-mono text-[11px] font-bold tracking-widest uppercase mb-6">Trayectoria · Evolving Hospitality</p>
+          <p class="font-mono text-[11px] font-bold tracking-widest uppercase mb-6">Trayectoria · El equipo detrás</p>
 
           <ul class="space-y-5">
             <li class="flex gap-4">
               <span class="display text-3xl text-secondary leading-none">→</span>
               <div>
-                <p class="font-semibold text-lg">Manuales completos de operación</p>
-                <p class="text-sm text-ink/70">Para Yumcha y franquicia hamburguesera V4 (HACCP, P&L, recetario tipo Starbucks).</p>
+                <p class="font-semibold text-lg">Directores y VP de Alimentos y Bebidas</p>
+                <p class="text-sm text-ink/70">Liderazgo ejecutivo en operaciones de F&B a escala internacional.</p>
               </div>
             </li>
             <li class="flex gap-4">
               <span class="display text-3xl text-secondary leading-none">→</span>
               <div>
-                <p class="font-semibold text-lg">2,877 párrafos · 25 capítulos</p>
-                <p class="text-sm text-ink/70">Es lo que toma estructurar la operación real de una cadena en crecimiento.</p>
+                <p class="font-semibold text-lg">Especialistas en operación de hoteles y restaurantes a nivel global</p>
+                <p class="text-sm text-ink/70">Experiencia directa en cocinas, salones, recepciones y back-of-house.</p>
               </div>
             </li>
             <li class="flex gap-4">
               <span class="display text-3xl text-secondary leading-none">→</span>
               <div>
-                <p class="font-semibold text-lg">Columna en La República</p>
-                <p class="text-sm text-ink/70">CX, operaciones, gestión de equipos en hospitality.</p>
+                <p class="font-semibold text-lg">Jefes de compras y Cost Controller</p>
+                <p class="text-sm text-ink/70">Control de costos, negociación con proveedores, optimización de márgenes.</p>
               </div>
             </li>
             <li class="flex gap-4">
               <span class="display text-3xl text-secondary leading-none">→</span>
               <div>
-                <p class="font-semibold text-lg">Consultoría a cadenas LATAM</p>
-                <p class="text-sm text-ink/70">Perú, México, Colombia. Operaciones, finanzas, expansión.</p>
+                <p class="font-semibold text-lg">Más de 15 años de experiencia en la industria</p>
+                <p class="text-sm text-ink/70">Restaurantes, hoteles, catering, franquicias, dark kitchens.</p>
               </div>
             </li>
           </ul>
@@ -974,8 +1020,8 @@
     <!-- Marquee 1: características fuertes del producto (arriba, izquierda → derecha) -->
     <div class="absolute top-[8%] left-0 right-0 opacity-[0.13]">
       <div class="marquee-track text-white" style="animation-duration: 32s;">
-        <span>SUNAT nativo  &middot;  0% fee en reservas  &middot;  Multi-sede de verdad  &middot;  En castellano  &middot;  Hecho por operadores  &middot;  Multi-sede de verdad  &middot;  </span>
-        <span aria-hidden="true">SUNAT nativo  &middot;  0% fee en reservas  &middot;  Multi-sede de verdad  &middot;  En castellano  &middot;  Hecho por operadores  &middot;  Multi-sede de verdad  &middot;  </span>
+        <span>Facturación nativa  &middot;  0% fee en reservas  &middot;  Multi-sede de verdad  &middot;  En tu idioma  &middot;  Hecho por operadores  &middot;  Plug and play  &middot;  </span>
+        <span aria-hidden="true">Facturación nativa  &middot;  0% fee en reservas  &middot;  Multi-sede de verdad  &middot;  En tu idioma  &middot;  Hecho por operadores  &middot;  Plug and play  &middot;  </span>
       </div>
     </div>
 
@@ -1107,9 +1153,9 @@
         <p class="text-xs font-bold tracking-widest uppercase font-mono mb-4 text-ink/60">Producto</p>
         <ul class="space-y-2 text-sm">
           <li><a href="#modulos" class="hover:text-primary">Pase</a></li>
-          <li><a href="#modulos" class="hover:text-primary">Caja (POS)</a></li>
+          <li><a href="#modulos" class="hover:text-primary">POS</a></li>
           <li><a href="#modulos" class="hover:text-primary">Línea (KDS)</a></li>
-          <li><a href="#modulos" class="hover:text-primary">Mesa (reservas)</a></li>
+          <li><a href="#modulos" class="hover:text-primary">Bienvenida (reservas)</a></li>
           <li><a href="#modulos" class="hover:text-primary">Mercado</a></li>
           <li><a href="#modulos" class="hover:text-primary">Recetas</a></li>
           <li><a href="#modulos" class="hover:text-primary">RRHH</a></li>
@@ -1126,10 +1172,16 @@
         <p class="text-xs font-bold tracking-widest uppercase font-mono mb-4 text-ink/60">Compañía</p>
         <ul class="space-y-2 text-sm">
           <li><a href="#fundador" class="hover:text-primary">Quién lo hizo</a></li>
-          <li><a href="#" class="hover:text-primary">Columna en La República</a></li>
-          <li><a href="#" class="hover:text-primary">Evolving Hospitality</a></li>
-          <li><a href="#" class="hover:text-primary">Casos de cadenas LATAM</a></li>
+          <li><a href="#" class="hover:text-primary">Blog</a></li>
+          <li><a href="#" class="hover:text-primary">Casos de éxito</a></li>
         </ul>
+
+        <!-- Social media -->
+        <div class="flex gap-3 mt-6">
+          <a href="#" class="social-link" aria-label="Instagram"><span class="material-symbols-outlined text-lg">photo_camera</span></a>
+          <a href="#" class="social-link" aria-label="LinkedIn"><span class="material-symbols-outlined text-lg">work</span></a>
+          <a href="https://wa.me/51999999999" class="social-link" aria-label="WhatsApp"><span class="material-symbols-outlined text-lg">chat</span></a>
+        </div>
       </div>
 
       <div>
@@ -1146,7 +1198,7 @@
     </div>
 
     <div class="pt-8 border-t-2 border-ink/15 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs font-mono text-ink/60">
-      <p>© 2026 Prep! · Hecho en Lima por Evolving Hospitality.</p>
+      <p>© 2026 Prep! · Hecho por operadores, para operadores.</p>
       <p class="flex gap-6">
         <a href="#" class="hover:text-primary">Términos</a>
         <a href="#" class="hover:text-primary">Privacidad</a>
@@ -1157,9 +1209,31 @@
 </footer>
 
 <!-- ============================================
+     SUPPORT 24H BADGE
+     ============================================ -->
+<a href="https://wa.me/51999999999" target="_blank" class="support-badge" title="Soporte 24 horas">
+  <span class="material-symbols-outlined">support_agent</span>
+  <span>Soporte 24h</span>
+  <span class="dot-atom" style="width:8px;height:8px;"></span>
+</a>
+
+<!-- ============================================
      JAVASCRIPT
      ============================================ -->
 <script>
+  // === Language toggle ===
+  function setLang(lang) {
+    document.body.classList.toggle('lang-en', lang === 'en');
+    document.querySelectorAll('.lang-toggle button').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+    });
+    // Update nav demo button text
+    const demoBtns = document.querySelectorAll('[data-demo-btn]');
+    demoBtns.forEach(btn => {
+      btn.textContent = lang === 'en' ? 'Request demo' : 'Pedir demo';
+    });
+  }
+
   // === Animación del logo en scroll ===
   const overlay = document.getElementById('logo-overlay');
   const navTarget = document.getElementById('nav-logo-target');
