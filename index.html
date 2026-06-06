@@ -1409,7 +1409,23 @@
     });
   }, { threshold: 0.12 });
 
-  document.querySelectorAll('.reveal, .module-card').forEach((el) => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  // === Module cards: reveal ALL when first card enters viewport ===
+  let modulesRevealed = false;
+  const allModuleCards = document.querySelectorAll('.module-card');
+  const moduleObserver = new IntersectionObserver((entries) => {
+    if (modulesRevealed) return;
+    entries.forEach((e) => {
+      if (e.isIntersecting && !modulesRevealed) {
+        modulesRevealed = true;
+        allModuleCards.forEach((card) => card.classList.add('in'));
+        allModuleCards.forEach((card) => moduleObserver.unobserve(card));
+      }
+    });
+  }, { threshold: 0.05 });
+
+  allModuleCards.forEach((el) => moduleObserver.observe(el));
 
   // === Tilt en cards ===
   document.querySelectorAll('.tilt-wrap').forEach((wrap) => {
