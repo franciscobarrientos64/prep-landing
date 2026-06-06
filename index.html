@@ -1251,7 +1251,7 @@
   }
 
 
-  // === Logo color animation: SPLATTERS DE PINTURA/SALSA inside letters ===
+  // === Logo color animation: SPLATTERS QUE SE ACUMULAN inside letters ===
   const logoCanvas = document.getElementById('logo-color-canvas');
   const logoImg = document.getElementById('logo-img');
   const logoCanvasWrap = document.getElementById('logo-canvas-wrap');
@@ -1264,48 +1264,45 @@
     img.src = logoImg.src;
     
     const COLORS = ['#1e5af9', '#ff3b30', '#ffcc00', '#1e5af9', '#ff3b30'];
-    const splats = [];
+    
+    // Offscreen canvas to accumulate paint permanently
+    const offscreen = document.createElement('canvas');
+    const octx = offscreen.getContext('2d');
+    let lastW = 0, lastH = 0;
     let lastSpawn = 0;
     
-    function spawnSplat(w, h, now) {
+    function spawnSplat(w, h) {
       const color = COLORS[Math.floor(Math.random() * COLORS.length)];
       const x = Math.random() * w;
       const y = Math.random() * h;
-      const mainR = 8 + Math.random() * Math.min(w, h) * 0.18;
+      const mainR = 6 + Math.random() * Math.min(w, h) * 0.14;
       
-      // Main blob + satellite drops (like real paint splatter)
-      const drops = [];
-      // Main drop - irregular shape via multiple overlapping circles
+      octx.fillStyle = color;
+      
+      // Main blob: 2-4 overlapping circles for organic shape
       const blobCount = 2 + Math.floor(Math.random() * 3);
       for (let i = 0; i < blobCount; i++) {
-        drops.push({
-          ox: (Math.random() - 0.5) * mainR * 0.6,
-          oy: (Math.random() - 0.5) * mainR * 0.6,
-          r: mainR * (0.5 + Math.random() * 0.5)
-        });
-      }
-      // Satellite splatters - small dots flying outward
-      const satCount = 3 + Math.floor(Math.random() * 6);
-      for (let i = 0; i < satCount; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const dist = mainR * (1.2 + Math.random() * 1.8);
-        drops.push({
-          ox: Math.cos(angle) * dist,
-          oy: Math.sin(angle) * dist,
-          r: 1.5 + Math.random() * 4
-        });
+        const ox = (Math.random() - 0.5) * mainR * 0.7;
+        const oy = (Math.random() - 0.5) * mainR * 0.7;
+        const r = mainR * (0.4 + Math.random() * 0.6);
+        octx.beginPath();
+        octx.arc(x + ox, y + oy, r, 0, Math.PI * 2);
+        octx.fill();
       }
       
-      splats.push({
-        x, y, color, drops,
-        alpha: 0.85 + Math.random() * 0.15,
-        born: now,
-        life: 2.5 + Math.random() * 2
-      });
+      // Satellite drops flying outward
+      const satCount = 2 + Math.floor(Math.random() * 5);
+      for (let i = 0; i < satCount; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = mainR * (1.1 + Math.random() * 2);
+        const r = 1 + Math.random() * 3.5;
+        octx.beginPath();
+        octx.arc(x + Math.cos(angle) * dist, y + Math.sin(angle) * dist, r, 0, Math.PI * 2);
+        octx.fill();
+      }
     }
     
     function runLogoAnim() {
-      const ctx = logoCanvas.getContext('2d');
       const w = logoImg.offsetWidth;
       const h = logoImg.offsetHeight;
       
@@ -1314,55 +1311,28 @@
         return;
       }
       
-      logoCanvas.width = w;
-      logoCanvas.height = h;
+      // Resize offscreen canvas only when dimensions change
+      if (w !== lastW || h !== lastH) {
+        offscreen.width = w;
+        offscreen.height = h;
+        lastW = w;
+        lastH = h;
+      }
+      
       const now = performance.now() / 1000;
       
-      // Spawn new splats
-      if (now - lastSpawn > 0.3) {
-        spawnSplat(w, h, now);
+      // Spawn new splats fast
+      if (now - lastSpawn > 0.07) {
+        spawnSplat(w, h);
+        if (Math.random() > 0.4) spawnSplat(w, h);
         lastSpawn = now;
       }
       
-      while (splats.length > 30) splats.shift();
-      
-      ctx.clearRect(0, 0, w, h);
-      
-      // Draw each splat
-      for (let i = splats.length - 1; i >= 0; i--) {
-        const s = splats[i];
-        const age = now - s.born;
-        
-        // Pop-in: scale from 0 to 1 in first 0.15s
-        let scale = Math.min(1, age / 0.15);
-        // Fade out near end of life
-        let alpha = s.alpha;
-        if (age > s.life - 0.5) {
-          alpha *= Math.max(0, (s.life - age) / 0.5);
-        }
-        
-        if (age > s.life) {
-          splats.splice(i, 1);
-          continue;
-        }
-        
-        ctx.globalAlpha = alpha;
-        ctx.fillStyle = s.color;
-        
-        // Draw each drop in the splat (hard edges, no gradient)
-        for (const d of s.drops) {
-          ctx.beginPath();
-          ctx.arc(
-            s.x + d.ox * scale,
-            s.y + d.oy * scale,
-            d.r * scale,
-            0, Math.PI * 2
-          );
-          ctx.fill();
-        }
-      }
-      
-      ctx.globalAlpha = 1;
+      // Render: copy offscreen to visible canvas + apply logo mask
+      logoCanvas.width = w;
+      logoCanvas.height = h;
+      const ctx = logoCanvas.getContext('2d');
+      ctx.drawImage(offscreen, 0, 0);
       
       // Mask: only keep paint inside letter shapes
       ctx.globalCompositeOperation = 'destination-in';
