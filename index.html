@@ -379,36 +379,10 @@
   select { appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23000' d='M6 8L0 0h12z'/></svg>"); background-repeat: no-repeat; background-position: right 24px center; }
 
 
-  /* Módulos: animación de entrada scroll-driven, más dramática */
-  .module-card {
-    opacity: 0;
-    transform: translateY(60px) scale(0.92) rotate(-1.5deg);
-    transition:
-      opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .module-card.in {
-    opacity: 1;
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  /* Stagger por índice */
-  .module-card[data-module-index="0"].in  { transition-delay: 0ms; }
-  .module-card[data-module-index="1"].in  { transition-delay: 60ms; }
-  .module-card[data-module-index="2"].in  { transition-delay: 120ms; }
-  .module-card[data-module-index="3"].in  { transition-delay: 180ms; }
-  .module-card[data-module-index="4"].in  { transition-delay: 240ms; }
-  .module-card[data-module-index="5"].in  { transition-delay: 300ms; }
-  .module-card[data-module-index="6"].in  { transition-delay: 360ms; }
-  .module-card[data-module-index="7"].in  { transition-delay: 420ms; }
-  .module-card[data-module-index="8"].in  { transition-delay: 480ms; }
-  .module-card[data-module-index="9"].in  { transition-delay: 540ms; }
-  .module-card[data-module-index="10"].in { transition-delay: 600ms; }
-  .module-card[data-module-index="11"].in { transition-delay: 660ms; }
-  .module-card[data-module-index="12"].in { transition-delay: 720ms; }
-  /* Sutil bounce en hover además del brutal */
+  /* Módulos: solo hover effect */
   .module-card:hover {
     transform: translate(-4px, -6px) rotate(-0.5deg);
-    transition-duration: 0.25s;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   /* ============================================
@@ -1410,22 +1384,6 @@
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-  // === Module cards: reveal ALL when first card enters viewport ===
-  let modulesRevealed = false;
-  const allModuleCards = document.querySelectorAll('.module-card');
-  const moduleObserver = new IntersectionObserver((entries) => {
-    if (modulesRevealed) return;
-    entries.forEach((e) => {
-      if (e.isIntersecting && !modulesRevealed) {
-        modulesRevealed = true;
-        allModuleCards.forEach((card) => card.classList.add('in'));
-        allModuleCards.forEach((card) => moduleObserver.unobserve(card));
-      }
-    });
-  }, { threshold: 0.05 });
-
-  allModuleCards.forEach((el) => moduleObserver.observe(el));
 
   // === Tilt en cards ===
   document.querySelectorAll('.tilt-wrap').forEach((wrap) => {
