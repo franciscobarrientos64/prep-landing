@@ -2,6 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/portal", "destination": "https://casa-italia.prep.rest/portal", "permanent": false },
+    { "source": "/login", "destination": "https://casa-italia.prep.rest/login", "permanent": false },
+    { "source": "/app", "destination": "https://casa-italia.prep.rest/", "permanent": false },
+    { "source": "/prep", "destination": "https://casa-italia.prep.rest/prep", "permanent": false },
+    { "source": "/admin", "destination": "https://casa-italia.prep.rest/admin", "permanent": false },
+    { "source": "/negocio", "destination": "https://casa-italia.prep.rest/prep-negocio", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",
