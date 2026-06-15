@@ -519,7 +519,7 @@
           Pedir demo &nbsp;→
         </button>
         <button onclick="document.getElementById('modulos').scrollIntoView({behavior:'smooth'})" class="bg-white text-ink btn-brutal px-8 py-4 text-lg flex items-center gap-2">
-          <span class="material-symbols-outlined">play_circle</span> Ver los 13 módulos
+          <span class="material-symbols-outlined">play_circle</span> Ver los 16 módulos
         </button>
       </div>
 
@@ -624,20 +624,21 @@
 <section id="modulos" class="px-4 md:px-8 max-w-7xl mx-auto py-24 md:py-32 relative z-20">
 
   <!-- Encabezado de sección -->
-  <div id="modules-header" class="mb-12 reveal">
+  <div id="modules-header" class="mb-12">
     <p class="text-xs font-bold tracking-[0.2em] uppercase font-mono text-secondary mb-4">02 — Lo que hace Prep!</p>
     <h2 class="display text-4xl md:text-6xl mb-4">
-      Trece módulos.
+      16 módulos.
       <span class="bg-primary text-white px-3 rotate-tag-r border-2 border-black inline-block">Un solo sistema.</span>
     </h2>
     <p class="text-base md:text-lg text-ink/70 max-w-2xl leading-relaxed">
-      Hablamos un mismo lenguaje y 6 de 13 módulos cubren lo que ningún otro sistema
+      Hablamos un mismo lenguaje y 6 de 16 módulos cubren lo que ningún otro sistema
       tiene conectado. Todos hablan entre sí desde el primer día.
+      <span class="block mt-2 font-mono text-xs text-ink/50">Toca cualquier módulo para ver todos sus features.</span>
     </p>
   </div>
 
   <!-- Grid de módulos: 3 columnas en desktop, más aire en cada card -->
-  <div id="modules-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-grid">
+  <div id="modules-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
     <!-- 01. PASE -->
     <div class="brutal bg-primary text-white rounded-xl-card p-7 module-card" data-module-index="0">
@@ -832,7 +833,7 @@
     </div>
 
     <!-- 13. ENGAGEMENT -->
-    <div class="brutal bg-tertiary text-ink rounded-xl-card p-7 module-card md:col-span-2 lg:col-span-1" data-module-index="12">
+    <div class="brutal bg-tertiary text-ink rounded-xl-card p-7 module-card" data-module-index="12">
       <div class="flex justify-between items-start mb-5">
         <span class="material-symbols-outlined icon-filled text-4xl">loyalty</span>
         <span class="font-mono text-[10px] font-bold tracking-wider opacity-50">13 · <span style="color:#1e5af9;opacity:1;">FOH</span></span>
@@ -844,6 +845,54 @@
         <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Gestión de catering y eventos desde la misma plataforma</li>
         <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Analytics predictivo: quién vuelve, cuándo y por qué</li>
         <li class="text-sm opacity-85 flex gap-2"><span class="opacity-50 shrink-0">→</span> Multi-marca: dark kitchen con marcas separadas para delivery</li>
+      </ul>
+    </div>
+
+    <!-- 14. MYSTERY SHOPPER -->
+    <div class="brutal bg-white rounded-xl-card p-7 module-card" data-module-index="13">
+      <div class="flex justify-between items-start mb-5">
+        <span class="material-symbols-outlined icon-filled text-4xl text-primary">visibility</span>
+        <span class="font-mono text-[10px] font-bold tracking-wider text-ink/40">14 · <span style="opacity:1;">OPS</span></span>
+      </div>
+      <h3 class="display text-4xl mb-2 text-ink">Mystery Shopper</h3>
+      <p class="text-xs font-bold tracking-widest uppercase mb-4 text-ink/50 font-mono">Evaluación de experiencia · Encuestas</p>
+      <ul class="space-y-2">
+        <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Evaluación ponderada con score por visita y criterio</li>
+        <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Encuestas a comensales post-visita con NPS y preguntas a medida</li>
+        <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Comparativo entre sedes con ranking y heatmap</li>
+        <li class="text-sm text-ink/80 flex gap-2"><span class="text-ink/30 shrink-0">→</span> Plan de acción con responsable y estado de avance</li>
+      </ul>
+    </div>
+
+    <!-- 15. PREDICCIÓN -->
+    <div class="brutal bg-primary text-white rounded-xl-card p-7 module-card" data-module-index="14">
+      <div class="flex justify-between items-start mb-5">
+        <span class="material-symbols-outlined icon-filled text-4xl">insights</span>
+        <span class="font-mono text-[10px] font-bold tracking-wider opacity-60">15 · <span style="opacity:1;">BOH</span></span>
+      </div>
+      <h3 class="display text-4xl mb-2">Predicción</h3>
+      <p class="text-xs font-bold tracking-widest uppercase mb-4 opacity-70 font-mono">IA estadística · Costo cero</p>
+      <ul class="space-y-2">
+        <li class="text-sm opacity-90 flex gap-2"><span class="opacity-50 shrink-0">→</span> Pronóstico de ventas y cubiertos a 7 días, sin API externa</li>
+        <li class="text-sm opacity-90 flex gap-2"><span class="opacity-50 shrink-0">→</span> Qué preparar mañana: mix de platos por día de la semana</li>
+        <li class="text-sm opacity-90 flex gap-2"><span class="opacity-50 shrink-0">→</span> Horas pico: demanda por franja horaria</li>
+        <li class="text-sm opacity-90 flex gap-2"><span class="opacity-50 shrink-0">→</span> Detección de días atípicos (±2σ)</li>
+      </ul>
+    </div>
+
+    <!-- 16. PLATAFORMA (base — ancho completo) -->
+    <div class="brutal bg-ink text-white rounded-xl-card p-7 module-card md:col-span-2 lg:col-span-3" data-module-index="15">
+      <div class="flex justify-between items-start mb-5">
+        <span class="material-symbols-outlined icon-filled text-4xl text-tertiary">hub</span>
+        <span class="font-mono text-[10px] font-bold tracking-wider opacity-40">16 · <span style="opacity:1;">CORE</span></span>
+      </div>
+      <h3 class="display text-4xl mb-2">Plataforma</h3>
+      <p class="text-xs font-bold tracking-widest uppercase mb-4 opacity-60 font-mono">La base: multi-sede · pagos · API · seguridad</p>
+      <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-2">
+        <li class="text-sm opacity-85 flex gap-2"><span class="opacity-40 shrink-0">→</span> Multi-cliente y multi-sede con datos aislados por restaurante (RLS)</li>
+        <li class="text-sm opacity-85 flex gap-2"><span class="opacity-40 shrink-0">→</span> Pasarelas de pago integradas: Niubiz, Culqi e Izipay por local</li>
+        <li class="text-sm opacity-85 flex gap-2"><span class="opacity-40 shrink-0">→</span> Roles y permisos por módulo: ver / operar / aprobar / admin</li>
+        <li class="text-sm opacity-85 flex gap-2"><span class="opacity-40 shrink-0">→</span> PWA offline instalable + API pública con scopes</li>
       </ul>
     </div>
 
@@ -1507,10 +1556,7 @@
   const modulesGrid = document.getElementById('modules-grid');
   const modulesHeader = document.getElementById('modules-header');
   function updateModulesFade() {
-    // Para módulos usamos umbrales más bajos: queremos que el fade arranque
-    // sólo cuando ya estén claramente saliendo del viewport.
-    applyScrollFade(modulesGrid, { start: 0.55, end: 0.10, translate: 40 });
-    applyScrollFade(modulesHeader, { start: 0.40, end: 0.0, translate: 30 });
+    // Fade de módulos desactivado: la sección permanece siempre visible y estable.
   }
 
   // === Master scroll listener ===
@@ -1525,6 +1571,287 @@
   updateLogo();
   updateHeroFade();
   updateModulesFade();
+</script>
+
+<!-- ============================================
+     MÓDULOS: catálogo completo + expandir tarjeta
+     ============================================ -->
+<script>
+(function () {
+  // <<CATALOG>> — AUTOGENERADO desde prep-platform/features.html (scripts/sync-catalog.mjs). No editar a mano.
+  // Catálogo completo por módulo (índice = data-module-index). [id, tier, título, descripción]
+  const CATALOG = [
+    { name:'Pase', f:[
+      ['PA-01','MVP','Pase en vivo','Cubiertos, ventas, food cost, ticket promedio y labor cost en tiempo real.'],
+      ['PA-02','MVP','Comparativo entre sedes','Las sedes lado a lado para leer la operación de un vistazo.'],
+      ['PA-03','MVP','Ingeniería de menú','Matriz estrellas / caballos de batalla / rompecabezas / perros.'],
+      ['PA-04','MVP','Alertas al celular','Avisos push al dueño cuando un indicador se desvía.'],
+      ['PA-05','MVP','Reportes cross-module','Informes configurables que cruzan datos de todos los módulos.'],
+      ['PA-06','F2','Reportes a medida','Vistas a medida que alimentan al Directorio.'],
+      ['PA-07','F3','Analítica predictiva','Proyección de indicadores clave del negocio.']]},
+    { name:'POS', f:[
+      ['CA-01','MVP','Ingreso de pedidos por mozo','Toma de pedido por silla, mesa o barra.'],
+      ['CA-02','MVP','Course timing','Urgente, marchar y dividir por pasos del servicio.'],
+      ['CA-03','MVP','Split de cuenta','Dividir por ítem o por proporción.'],
+      ['CA-04','MVP','Cuentas abiertas (tabs)','Tabs de barra concurrentes con nombre y asientos agrupados.'],
+      ['CA-05','MVP','Pedido en mesa por QR','Carta digital que crea el pedido y entra a cocina.'],
+      ['CA-06','MVP','Ruteo de impresión','Comandas por estación, impresión real 80mm.'],
+      ['CA-07','MVP','Cortesías con aprobación','Flujo de aprobación de gerente para invitaciones.'],
+      ['CA-08','MVP','Multipago','Efectivo, Yape, Plin, transferencia, tarjetas, Niubiz/Culqi/Izipay.'],
+      ['CA-09','MVP','Facturación SUNAT','Boleta/factura vía PSE/OSE (alta del cliente).'],
+      ['CA-10','MVP','Modificadores priceados','Modificadores complejos por ítem con precio.'],
+      ['CA-11','MVP','Captura de propina','Propina capturada en el cobro.'],
+      ['CA-12','MVP','Audit log universal','Bitácora de abrir/cancelar, cortesías, cobros (por tenant).'],
+      ['CA-13','MVP','Gift cards','Vender, recargar y cobrar con tarjeta de regalo.'],
+      ['CA-14','MVP','Pantalla al cliente','Customer-facing display en tiempo real.'],
+      ['CA-15','MVP','Ticket suspendido','Pausar y retomar una cuenta.'],
+      ['CA-16','MVP','Plano en tiempo real','Floor plan con colores por estado de mesa.'],
+      ['CA-17','MVP','Mover de mesa','Cambiar invitados de mesa sin perder la cuenta.'],
+      ['CA-18','MVP','Sillas de barra','Visibles y agrupables en un mismo pedido.'],
+      ['CA-19','MVP','Zoom a la mesa','Posiciones de silla, ítems por silla o compartidos.'],
+      ['CA-20','MVP','Menú por familias','Cocina y bar organizados por categorías.'],
+      ['CA-21','MVP','Notas por ítem','Términos de carne e instrucciones a cocina.'],
+      ['CA-22','MVP','Alergias por silla','Captura por posición y extrapolación a compartidos.'],
+      ['CA-23','MVP','Flujo de cobro secuencial','Cobrar → dividir → pre-cuenta → comprobante → método → propina.']]},
+    { name:'Línea', f:[
+      ['LI-01','MVP','KDS principal','El pase del expedidor en pantalla.'],
+      ['LI-02','MVP','KDS de delivery','Pantalla dedicada para pedidos a domicilio.'],
+      ['LI-07','MVP','Priorización por tiempo','Orden por course timing del servicio.'],
+      ['LI-09','F2','Alerta de merma anómala','Aviso cuando un consumo se sale de lo esperado.'],
+      ['LI-10','MVP','Ruteo por estación','Cada comanda a su estación.'],
+      ['LI-11','MVP','Colores por tiempo','Verde <5min, amarillo 5–10min, rojo >10min.'],
+      ['LI-12','MVP','Touch de estado','Oído → Va → En fuego → Servido con un toque.'],
+      ['LI-13','MVP','Sonido / vibración','Aviso al recibir una nueva comanda.']]},
+    { name:'Bienvenida', f:[
+      ['MS-01','MVP','Reservas con widget','Widget embebible con 0% de comisión.'],
+      ['MS-02','MVP','Ficha del invitado','Historial completo de visitas y consumo.'],
+      ['MS-03','MVP','VIP, alergias, preferencias','Tags, dietas, ocasiones y notas especiales.'],
+      ['MS-04','MVP','Editor de plano','Floor plan visual editable.'],
+      ['MS-05','MVP','Card hold anti no-show','Garantía con tarjeta contra ausencias.'],
+      ['MS-06','MVP','Waitlist con WhatsApp/SMS','Lista de espera con aviso automático.'],
+      ['MS-07','MVP','Prioridad por salud','Adultos mayores, embarazadas, niños, discapacidad.'],
+      ['MS-08','F2','Pantalla pública de waitlist','La espera visible en una pantalla del local.'],
+      ['MS-09','F2','Waitlist en web','La espera visible en la web pública.'],
+      ['MS-10','MVP','Bot de WhatsApp','Reservas conversacionales por WhatsApp.'],
+      ['MS-11','MVP','Allergen surface','Alergias visibles al mozo en la atención.'],
+      ['MS-12','MVP','Timeline Gantt','Mesas por hora con turn-time.'],
+      ['MS-13','MVP','Drag & drop','Asignar reservas al plano arrastrando.'],
+      ['MS-14','MVP','Prioridades obligatorias','Reglas de prioridad por tipo de invitado.'],
+      ['MS-15','MVP','Registro de invitado','Alta con consentimiento de marketing (Ley 29733).'],
+      ['MS-16','MVP','Confirmación automática','Botón aceptar → confirmación por WhatsApp.']]},
+    { name:'Mercado', f:[
+      ['ME-01','MVP','Comparativo de compras','Precios entre proveedores y webs, con el más barato marcado.'],
+      ['ME-02','MVP','Histórico de precios','Tracking de la evolución de cada insumo.'],
+      ['ME-03','MVP','Alerta de variación','Aviso cuando un precio sube fuera de rango.'],
+      ['ME-04','MVP','Impacto en food cost','Alerta del efecto de un precio sobre el costo del plato.'],
+      ['ME-05','MVP','OCR de facturas','Captura de facturas de proveedor por foto.'],
+      ['ME-06','F2','Vendor scoring','Calificación de proveedores por precio, cumplimiento y calidad.'],
+      ['ME-07','MVP','Inventario por sede','Stock por almacén, con PAR y stock exacto.'],
+      ['ME-08','MVP','Mermas con motivo','Registro de mermas categorizado.'],
+      ['ME-09','MVP','Vencimientos (FEFO)','Alertas por fecha de vencimiento.'],
+      ['ME-10','MVP','Facturas a Contabilidad','Registro automático para el libro de compras.'],
+      ['ME-11','F2','Inventario predictivo','Sugerencia de reposición según consumo.'],
+      ['ME-12','MVP','Conteo físico ciego','Conteo a ciegas con doble aprobación y anomalías.'],
+      ['ME-13','MVP','Órdenes de compra','Armado de pedido para completar PAR, con aprobación.'],
+      ['ME-14','MVP','FIFO por lotes','Trazabilidad por lote.'],
+      ['ME-15','MVP','Multi-sede y transferencias','Mover stock entre locales.']]},
+    { name:'Recetas', f:[
+      ['RC-01','MVP','Recetas con gramajes','Ingredientes y cantidades por plato.'],
+      ['RC-02','MVP','Costeo automático','Costo del plato en tiempo real.'],
+      ['RC-03','MVP','Food cost permanente','Food cost actualizado al cambiar precios.'],
+      ['RC-04','MVP','Escalado de recetas','De 1 a N porciones automáticamente.'],
+      ['RC-05','MVP','Alertas de vencimiento','Avisos ligados a los insumos de la receta.'],
+      ['RC-06','MVP','Ingeniería de menú','Matriz de rentabilidad y popularidad.'],
+      ['RC-07','MVP','Ficha técnica imprimible','La receta lista para cocina.'],
+      ['RC-08','MVP','Alérgenos por receta','Alérgenos declarados a nivel de plato.'],
+      ['RC-09','F2','Sub-recetas reutilizables','Preparaciones base usadas en varios platos.']]},
+    { name:'RRHH', f:[
+      ['RH-01','MVP','Convocatorias','Ofertas de trabajo y reclutamiento.'],
+      ['RH-02','MVP','Contratos digitales','Generación y firma de contratos.'],
+      ['RH-03','MVP','Manuales del puesto','Versionados por posición.'],
+      ['RH-04','MVP','Ficha completa','CV, historial y conversaciones (The Talk).'],
+      ['RH-05','MVP','Intranet operativa','Integrada con El Libro.'],
+      ['RH-06','MVP','Asistencia con geofence','Selfie + geolocalización, foto a bucket privado.'],
+      ['RH-07','MVP','Permisos y vacaciones','Solicitudes y aprobación digital.'],
+      ['RH-08','MVP','Planilla en un clic','ONP/AFP, renta 5ta, EsSalud, neto y costo empresa.'],
+      ['RH-09','MVP','Carrera de servicio','Plan de crecimiento y mejora continua.'],
+      ['RH-10','MVP','Dashboard por trabajador','Estado y métricas de cada colaborador.'],
+      ['RH-11','MVP','Programación de turnos','Horarios con detección de conflictos.'],
+      ['RH-12','MVP','Labor cost en vivo','Costo laboral sobre ventas en tiempo real.'],
+      ['RH-13','MVP','Shift swap','Cambio de turnos en línea.'],
+      ['RH-14','MVP','Tip pooling','Reparto automático de propinas.']]},
+    { name:'Delivery', f:[
+      ['DE-01','MVP','Delivery con KDS','Pedidos con pantalla dedicada de cocina.'],
+      ['DE-02','MVP','Marketplace propio','Tienda con 0% de comisión.'],
+      ['DE-03','MVP','Online ordering','Pedido directo sin Rappi/PedidosYa.'],
+      ['DE-04','F2','Dark kitchen multi-marca','Varias marcas desde una misma cocina.'],
+      ['DE-05','F2','Catering y eventos','Pedidos grandes y por encargo.'],
+      ['DE-06','F2','Tracking de estado','Seguimiento del pedido en tiempo real.'],
+      ['DE-07','F2','Zonas con tarifas','Cobertura con tarifa y tiempo por zona.']]},
+    { name:'Contabilidad', f:[
+      ['TR-01','MVP','Facturas desde Mercado','Registro automático de compras.'],
+      ['TR-02','MVP','Integración contable','Exporta a tu software contable.'],
+      ['TR-03','F2','Pre-liquidación PDT 621','Borrador de impuestos del mes.'],
+      ['TR-04','F2','Contador Prep!','Servicio contable opcional.'],
+      ['TR-05','MVP','Libros pre-armados','Ventas y compras listos.'],
+      ['TR-06','MVP','Cierre mensual','Cierre automatizado.'],
+      ['FN-01','MVP','Presupuesto vs real','Partidas, recurrentes, variación y alertas por umbral.']]},
+    { name:'Vuelto', f:[
+      ['VU-01','MVP','OCR de recibos','Captura de gastos por foto, con IA.'],
+      ['VU-02','MVP','Centro de costo','Clasificación automática del gasto.'],
+      ['VU-03','MVP','Cierre diario','Cuadre automático de caja chica.'],
+      ['VU-04','MVP','Límites por empleado','Topes con alertas.'],
+      ['VU-05','MVP','Aprobación de supervisor','Workflow de aprobación de gastos.']]},
+    { name:'El Libro', f:[
+      ['LB-01','MVP','Manuales con versiones','Procedimientos y SOPs versionados.'],
+      ['LB-02','MVP','HACCP digital','Checklists y registros de inocuidad.'],
+      ['LB-03','MVP','Recetario consultivo','Recetas para consulta de cocina.'],
+      ['LB-04','F2','Marketplace de plantillas','Plantillas listas para usar.'],
+      ['LB-05','MVP','Onboarding por rol','Inducción según la posición.'],
+      ['LB-06','MVP','Tablón + mensaje del día','Comunicados con confirmación de lectura.'],
+      ['LB-07','MVP','Panel de equipo','Todos los miembros con su puesto.'],
+      ['LB-08','MVP','Exámenes y panel de notas','Rendir y ver puntajes por colaborador.'],
+      ['LB-09','MVP','Calendario de eventos','Capacitaciones, observaciones y reuniones + asistencia.'],
+      ['LB-10','MVP','The Talk (1 a 1)','Conversaciones de feedback con compromisos.'],
+      ['LB-11','MVP','Políticas de trabajo','Reglamento interno del restaurante.']]},
+    { name:'Directorio', f:[
+      ['DI-01','MVP','KPIs estratégicos','Indicadores que cruzan todos los módulos.'],
+      ['DI-02','MVP','Reportes a medida','Informes configurables.'],
+      ['DI-03','MVP','Dashboards y drill-down','Series de tiempo, comparativos y detalle.'],
+      ['DI-04','MVP','Exports PDF y Excel','Descarga de los reportes.'],
+      ['DI-05','MVP','Reportes programados','Envío por WhatsApp/email.'],
+      ['DI-06','MVP','Alertas de desvío','Aviso cuando un KPI se sale de rango.']]},
+    { name:'Engagement', f:[
+      ['EN-04','F2','Campañas segmentadas','Audiencias con consentimiento + WhatsApp/email.'],
+      ['TX-01','F2','Loyalty en WhatsApp','Niveles y puntos por consumo.'],
+      ['TX-02','F2','Menú multilenguaje','La carta en varios idiomas.'],
+      ['TX-03','F3','App nativa','iOS/Android del restaurante.'],
+      ['TX-04','F2','API pública','Integración con sistemas externos por API key.'],
+      ['EN-01','F2','Catering y eventos','Gestión de eventos especiales.'],
+      ['EN-02','F2','Dark kitchen multi-marca','Varias marcas en una cocina.'],
+      ['EN-03','F3','Analítica predictiva','Predicción de comportamiento del invitado.'],
+      ['TX-05','F3','Marketplace de plantillas','Plantillas de campañas y contenido.']]},
+    { name:'Mystery Shopper', f:[
+      ['MY-01','MVP','Evaluación ponderada','Criterios con peso y score por visita.'],
+      ['MY-02','MVP','Resumen ejecutivo','KPIs, mejor criterio, crítico y promedio.'],
+      ['MY-03','MVP','Tendencias por criterio','Evolución mensual con line chart.'],
+      ['MY-04','MVP','Radar de perfil','Perfil por criterio con meses superpuestos.'],
+      ['MY-05','MVP','Detalle por mes','Las visitas del mes juntas (no sueltas).'],
+      ['MY-06','MVP','Auditoría ítem por ítem','Mapa de calor por nivel (color, sin nota).'],
+      ['MY-07','MVP','Comparativo entre sedes','Ranking y heatmap criterio × sede.'],
+      ['MY-08','MVP','Plan de acción','Acciones de mejora con responsable y estado.'],
+      ['MY-09','MVP','Encuestas a comensales','Encuestas post-visita con preguntas configurables, NPS y disparo por QR/WhatsApp.']]},
+    { name:'Predicción', f:[
+      ['PR-01','MVP','Pronóstico de ventas','Ventas y cubiertos a 7 días, sin API externa.'],
+      ['PR-02','MVP','Qué preparar mañana','Mix de platos por día de la semana.'],
+      ['PR-03','MVP','Horas pico','Demanda por franja horaria.'],
+      ['PR-04','MVP','Días atípicos','Detección de outliers (±2σ).']]},
+    { name:'Plataforma', f:[
+      ['PL-01','MVP','Multi-cliente / multi-sede','Cada restaurante con su subdominio y data aislada (RLS).'],
+      ['PL-02','MVP','Selector de restaurante y sede','Saltar entre marcas y locales sin re-login (SSO).'],
+      ['PL-03','MVP','Paquetes por cliente','Módulos encendidos/apagados por plan, con upsell.'],
+      ['PL-04','MVP','Pasarelas de pago','Niubiz, Culqi e Izipay por local.'],
+      ['PL-05','F2','API pública','Keys con scopes (ventas, productos, inventario).'],
+      ['PL-06','MVP','PWA offline','Instalable, con banner offline y accesibilidad por teclado.'],
+      ['PL-07','MVP','Roles y permisos','Ver / operar / aprobar / admin, por módulo.']]}
+  ];
+  // <</CATALOG>>
+
+  // ============================================
+  //  MODO SUPERADMIN — control de visibilidad
+  //  Por defecto el público sólo ve los features DESTACADOS de cada tarjeta.
+  //  El catálogo completo se revela sólo cuando el superadmin lo activa.
+  //  Desbloquear:  ?sa=prep-super     ·    Bloquear:  ?sa=off
+  //  (es protección de cara al público; ver nota al equipo sobre View Source)
+  // ============================================
+  const SA_KEY = 'prep-super';          // <-- clave para desbloquear (cámbiala cuando quieras)
+  const LS_UNLOCK = 'prep_sa';          // este dispositivo es superadmin
+  const LS_REVEAL = 'prep_reveal_all';  // estado actual de la vista completa
+  const params = new URLSearchParams(location.search);
+  if (params.get('sa') === SA_KEY) { localStorage.setItem(LS_UNLOCK,'1'); localStorage.setItem(LS_REVEAL,'1'); }
+  if (params.get('sa') === 'off')  { localStorage.removeItem(LS_UNLOCK); localStorage.removeItem(LS_REVEAL); }
+  const unlocked = localStorage.getItem(LS_UNLOCK) === '1';
+  let revealAll  = unlocked && localStorage.getItem(LS_REVEAL) === '1';
+
+  function buildToggle(card, mod) {
+    const onSecondary = card.classList.contains('bg-secondary');
+    const wide = card.classList.contains('lg:col-span-3');
+
+    // Panel con TODOS los features (colapsado por defecto) — sin etiquetas de fase
+    const panel = document.createElement('div');
+    panel.className = 'mod-all-feats';
+    panel.style.cssText = 'display:none;margin-top:18px;padding-top:16px;border-top:1px solid currentColor;';
+    const label = document.createElement('p');
+    label.className = 'font-mono text-[10px] font-bold tracking-widest uppercase mb-3';
+    label.style.opacity = '.5';
+    label.textContent = mod.f.length + ' features en este módulo';
+    panel.appendChild(label);
+    const list = document.createElement('ul');
+    list.className = wide ? 'grid sm:grid-cols-2 gap-x-8 gap-y-2.5' : 'space-y-2.5';
+    mod.f.forEach(f => {
+      const li = document.createElement('li');
+      li.className = 'text-sm flex gap-2 items-start';
+      li.style.opacity = '.9';
+      li.innerHTML = '<span class="shrink-0" style="opacity:.4">→</span>' +
+        '<span><strong>' + f[2] + '.</strong> <span style="opacity:.72">' + f[3] + '</span></span>';
+      list.appendChild(li);
+    });
+    panel.appendChild(list);
+    card.appendChild(panel);
+
+    // Botón con el estilo de "Pedir demo" (pill brutalista)
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'mod-toggle btn-brutal mt-6 px-6 py-3 text-sm inline-flex items-center gap-2 ' +
+      (onSecondary ? 'bg-white text-ink' : 'bg-secondary text-white');
+    btn.style.cursor = 'pointer';
+    const setLabel = (open) => {
+      btn.innerHTML = (open ? 'Ver menos' : 'Ver los ' + mod.f.length + ' features') +
+        '<span class="material-symbols-outlined text-lg" style="transition:transform .2s;transform:rotate(' +
+        (open ? '180deg' : '0deg') + ')">expand_more</span>';
+    };
+    setLabel(false);
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = panel.style.display === 'none';
+      panel.style.display = open ? 'block' : 'none';
+      setLabel(open);
+    });
+    card.appendChild(btn);
+  }
+
+  let saBadge = null;
+  function applyReveal() {
+    document.querySelectorAll('.module-card[data-module-index]').forEach(card => {
+      const mod = CATALOG[+card.getAttribute('data-module-index')];
+      if (!mod) return;
+      const has = card.querySelector('.mod-toggle');
+      if (revealAll && !has) buildToggle(card, mod);
+      if (!revealAll && has) {
+        has.remove();
+        const p = card.querySelector('.mod-all-feats'); if (p) p.remove();
+      }
+    });
+    if (saBadge) saBadge.querySelector('.sa-state').textContent = revealAll ? 'ON' : 'OFF';
+  }
+
+  // Control flotante: sólo lo ve un dispositivo desbloqueado como superadmin
+  if (unlocked) {
+    saBadge = document.createElement('button');
+    saBadge.type = 'button';
+    saBadge.className = 'btn-brutal bg-ink text-white';
+    saBadge.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:60;padding:10px 16px;font-family:monospace;font-size:12px;font-weight:700;display:flex;gap:8px;align-items:center;cursor:pointer;';
+    saBadge.innerHTML = 'Catálogo completo: <span class="sa-state"></span>';
+    saBadge.addEventListener('click', () => {
+      revealAll = !revealAll;
+      if (revealAll) localStorage.setItem(LS_REVEAL,'1'); else localStorage.removeItem(LS_REVEAL);
+      applyReveal();
+    });
+    document.body.appendChild(saBadge);
+  }
+
+  applyReveal();
+})();
 </script>
 </body>
 </html>
