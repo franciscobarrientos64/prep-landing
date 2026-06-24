@@ -634,6 +634,22 @@
       Hablamos un mismo lenguaje y los 16 módulos están conectados como ningún otro
       sistema lo tiene. Todos hablan entre sí desde el primer día.
     </p>
+
+    <!-- Leyenda de áreas (separación FOH / BOH / OPS / CORE) -->
+    <div class="flex flex-wrap gap-2 mt-6 font-mono text-[11px] font-bold uppercase tracking-wider">
+      <span class="brutal-sm rounded-full bg-white px-3 py-1 inline-flex items-center gap-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#1e5af9;"></span>FOH — Salón
+      </span>
+      <span class="brutal-sm rounded-full bg-white px-3 py-1 inline-flex items-center gap-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#171c20;"></span>BOH — Cocina
+      </span>
+      <span class="brutal-sm rounded-full bg-white px-3 py-1 inline-flex items-center gap-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#ff3b30;"></span>OPS — Experiencia
+      </span>
+      <span class="brutal-sm rounded-full bg-white px-3 py-1 inline-flex items-center gap-2">
+        <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#ffcc00;"></span>CORE — Núcleo
+      </span>
+    </div>
   </div>
 
   <!-- Grid de módulos: 3 columnas en desktop, más aire en cada card -->
@@ -1289,17 +1305,284 @@
      ============================================ -->
 <script>
   // === Language toggle ===
-  function setLang(lang) {
-    document.body.classList.toggle('lang-en', lang === 'en');
-    document.querySelectorAll('.lang-toggle button').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  /* ============================================
+     i18n ENGINE — diccionario ES→EN + walker de nodos
+     Los nombres de módulo (Pase, Línea, Mercado…) se mantienen en
+     español a propósito (la marca "habla como la cocina").
+     ============================================ */
+  (function () {
+    // Claves NORMALIZADAS (espacios colapsados a uno). ES -> EN.
+    const EN = {
+      // Nav / CTA
+      'Prep! — Software de operaciones para restaurantes': 'Prep! — Restaurant operations software',
+      'Módulos': 'Modules',
+      'Por qué Prep!': 'Why Prep!',
+      'Quién lo hizo': 'Who built it',
+      'Ver en vivo': 'See it live',
+      'Pedir demo': 'Request demo',
+      'Pedir demo →': 'Request demo →',
+      // Hero
+      'Software de cocina · Hecho por operadores': 'Kitchen software · Built by operators',
+      'Antes lo': 'We used to',
+      'operamos.': 'operate it.',
+      'Ahora lo construimos.': 'Now we build it.',
+      'Software de reservas, operación, venta y fidelización para restaurantes pequeños y grandes.': 'Reservations, operations, sales and loyalty software for restaurants big and small.',
+      'Hecho por operadores internacionales': 'Built by international operators',
+      'para cualquier negocio gastronómico.': 'for any food & beverage business.',
+      'Ver los 16 módulos': 'See all 16 modules',
+      '① Facturación electrónica nativa ② 0% fee en reservas ③ Multi-sede de verdad ④ Plug and play': '① Native e-invoicing ② 0% fee on reservations ③ True multi-location ④ Plug and play',
+      // Panel en vivo (El Pase)
+      'EL PASE · EN VIVO': 'THE PASS · LIVE',
+      'Sede: Miraflores': 'Location: Miraflores',
+      'Cubiertos hoy': 'Covers today',
+      '↑ 12% vs ayer': '↑ 12% vs yesterday',
+      'Ventas': 'Sales',
+      'Ticket prom.': 'Avg. check',
+      'Mesas': 'Tables',
+      'Órdenes en línea': 'Online orders',
+      'enviado': 'sent',
+      'en fuego': 'firing',
+      'servido': 'served',
+      'Sincronizado hace 2 seg': 'Synced 2 sec ago',
+      'Hecho en cocina ✦': 'Made in the kitchen ✦',
+      // Sección 02
+      '02 — Lo que hace Prep!': '02 — What Prep! does',
+      '16 módulos.': '16 modules.',
+      'Un solo sistema.': 'One single system.',
+      'Hablamos un mismo lenguaje y los 16 módulos están conectados como ningún otro sistema lo tiene. Todos hablan entre sí desde el primer día.': 'We speak one shared language and all 16 modules are connected like no other system. They all talk to each other from day one.',
+      'FOH — Salón': 'FOH — Front of house',
+      'BOH — Cocina': 'BOH — Back of house',
+      'OPS — Experiencia': 'OPS — Experience',
+      'CORE — Núcleo': 'CORE — Core',
+      // Tarjetas de módulos (descriptores + bullets)
+      'Dashboard en tiempo real': 'Real-time dashboard',
+      'KPIs en vivo: cubiertos, ventas, food cost, ticket promedio': 'Live KPIs: covers, sales, food cost, average check',
+      'Alertas push cuando algo se sale del rango': 'Push alerts when something goes out of range',
+      'Comparativo multi-sede en una sola pantalla': 'Multi-location comparison on a single screen',
+      'Matrix de menu engineering exportable': 'Exportable menu-engineering matrix',
+      'Punto de venta · Facturación nativa': 'Point of sale · Native invoicing',
+      'Floor plan editable, open tabs, split bills por mesa': 'Editable floor plan, open tabs, split bills per table',
+      'Boleta, factura y medios de pago integrados desde el primer ticket': 'Receipts, invoices and payment methods integrated from the first ticket',
+      'QR en mesa para que el comensal pida desde su celular': 'Table QR so guests order from their phone',
+      'Propinas capturadas y dirigidas a RRHH automáticamente': 'Tips captured and routed to HR automatically',
+      'Comandas priorizadas y cronometradas por estación': 'Orders prioritized and timed by station',
+      'Print station routing: cada preparación va al lugar correcto': 'Print station routing: each prep goes to the right place',
+      'Course timing para mesas de múltiples tiempos': 'Course timing for multi-course tables',
+      'KDS paralelo para delivery sin mezclar sedes': 'Parallel KDS for delivery without mixing locations',
+      'Reservas · 0% comisión siempre': 'Reservations · 0% commission always',
+      'Ficha del comensal: historial, VIP, alergias, preferencias': 'Guest profile: history, VIP, allergies, preferences',
+      'Card hold anti-no-show: cobra si no aparecen': 'Anti-no-show card hold: charge if they don’t show',
+      'Waitlist por SMS o WhatsApp con confirmación automática': 'Waitlist by SMS or WhatsApp with automatic confirmation',
+      'Bot de WhatsApp que reserva sin que toques nada': 'WhatsApp bot that books with zero effort',
+      'Compras + Inventario multi-sede': 'Purchasing + multi-location inventory',
+      'OCR de facturas de proveedores: foto y listo': 'Supplier-invoice OCR: snap a photo and done',
+      'Comparativo de precios histórico por proveedor': 'Historical price comparison by supplier',
+      'Vendor scoring automático por puntualidad y precio': 'Automatic vendor scoring by punctuality and price',
+      'Control de mermas y conteo físico por turno': 'Waste control and physical count per shift',
+      'Costeo en tiempo real': 'Real-time costing',
+      'Ingredientes con gramajes, rendimiento y mermas incluidas': 'Ingredients with weights, yield and waste included',
+      'Food cost actualizado cada vez que entra una factura': 'Food cost updated every time an invoice comes in',
+      'Recipe scaling automático para cambio de porciones': 'Automatic recipe scaling for portion changes',
+      'Matrix de menu engineering exportable para el equipo': 'Exportable menu-engineering matrix for the team',
+      'Personal · Nómina · Turnos': 'Staff · Payroll · Shifts',
+      'Ficha de empleado con registro de "The Talk" por colaborador': 'Employee profile with a “The Talk” log per team member',
+      'Planilla de nómina generada en un clic': 'Payroll generated in one click',
+      'Shift scheduling con swap online entre empleados': 'Shift scheduling with online swaps between employees',
+      'Tip pooling automático desde POS a planilla': 'Automatic tip pooling from POS to payroll',
+      'Marketplace propio · 0% fee': 'Your own marketplace · 0% fee',
+      'Pedidos de delivery con KDS dedicado sin mezclar con salón': 'Delivery orders with a dedicated KDS, never mixed with the dining room',
+      'Marketplace propio en tu web: sin depender de agregadores': 'Your own marketplace on your site: no dependence on aggregators',
+      '0% de comisión por pedido. Siempre.': '0% commission per order. Always.',
+      'Dark kitchen multi-marca desde una sola cocina': 'Multi-brand dark kitchen from a single kitchen',
+      'Tributario · Facturación automatizada': 'Tax · Automated invoicing',
+      'Facturas generadas automáticamente desde Mercado': 'Invoices generated automatically from Mercado',
+      'Conexión nativa con sistemas de facturación electrónica': 'Native connection to e-invoicing systems',
+      'Libro de ventas pre-armado para declaraciones tributarias': 'Pre-built sales ledger for tax filings',
+      'Cierre mensual sin tocar Excel ni llamar al contador': 'Monthly close without touching Excel or calling the accountant',
+      'Caja chica · OCR con IA': 'Petty cash · AI-powered OCR',
+      'Foto del recibo, la IA clasifica y asigna el gasto': 'Snap the receipt — AI classifies and assigns the expense',
+      'Categorías por centro de costo configurables': 'Configurable categories by cost center',
+      'Cierre automático al final del turno o del día': 'Automatic close at the end of the shift or day',
+      'Límites por empleado con alertas en tiempo real': 'Per-employee limits with real-time alerts',
+      'Manuales operativos con control de versiones': 'Operating manuals with version control',
+      'HACCP digital: registros de temperatura y limpieza': 'Digital HACCP: temperature and cleaning logs',
+      'Recetario consultivo para el equipo de cocina': 'Reference recipe book for the kitchen team',
+      'Marketplace de plantillas operativas pre-cargadas': 'Marketplace of pre-loaded operating templates',
+      'KPIs estratégicos cruzados entre todos los módulos': 'Strategic KPIs cross-referenced across all modules',
+      'Reportes a medida por período, sede o línea de producto': 'Custom reports by period, location or product line',
+      'Envío automático por WhatsApp o email al equipo directivo': 'Automatic delivery by WhatsApp or email to leadership',
+      'Alertas inteligentes cuando un KPI se desvía del rango': 'Smart alerts when a KPI drifts out of range',
+      'Fidelización · Catering · Eventos': 'Loyalty · Catering · Events',
+      'Programa de loyalty por WhatsApp sin app adicional': 'WhatsApp loyalty program with no extra app',
+      'Gestión de catering y eventos desde la misma plataforma': 'Catering and events management from the same platform',
+      'Analytics predictivo: quién vuelve, cuándo y por qué': 'Predictive analytics: who returns, when and why',
+      'Multi-marca: dark kitchen con marcas separadas para delivery': 'Multi-brand: dark kitchen with separate delivery brands',
+      'Evaluación de experiencia · Encuestas': 'Experience evaluation · Surveys',
+      'Evaluación ponderada con score por visita y criterio': 'Weighted evaluation with score per visit and criterion',
+      'Encuestas a comensales post-visita con NPS y preguntas a medida': 'Post-visit guest surveys with NPS and custom questions',
+      'Comparativo entre sedes con ranking y heatmap': 'Cross-location comparison with ranking and heatmap',
+      'Plan de acción con responsable y estado de avance': 'Action plan with owner and progress status',
+      'IA estadística · Costo cero': 'Statistical AI · Zero cost',
+      'Pronóstico de ventas y cubiertos a 7 días, sin API externa': '7-day sales and covers forecast, no external API',
+      'Qué preparar mañana: mix de platos por día de la semana': 'What to prep tomorrow: dish mix by day of week',
+      'Horas pico: demanda por franja horaria': 'Peak hours: demand by time slot',
+      'Detección de días atípicos (±2σ)': 'Outlier-day detection (±2σ)',
+      'La base: multi-sede · pagos · API · seguridad': 'The foundation: multi-location · payments · API · security',
+      'Multi-cliente y multi-sede con datos aislados por restaurante (RLS)': 'Multi-tenant and multi-location with data isolated per restaurant (RLS)',
+      'Pasarelas de pago integradas: Niubiz, Culqi e Izipay por local': 'Integrated payment gateways: Niubiz, Culqi and Izipay per location',
+      'Roles y permisos por módulo: ver / operar / aprobar / admin': 'Roles and permissions per module: view / operate / approve / admin',
+      'PWA offline instalable + API pública con scopes': 'Installable offline PWA + public API with scopes',
+      // Bloque "plug and play / conectado"
+      'Plug and play · Todo conectado desde el día uno': 'Plug and play · Everything connected from day one',
+      'Todos los módulos comparten una base de datos única. Lo que entra en': 'All modules share a single database. What enters',
+      'actualiza': 'updates',
+      '. Lo que compras en': '. What you buy in',
+      'alimenta': 'feeds',
+      '. Lo que calcula': '. What',
+      'baja a': 'calculates flows into',
+      '. Sin exportar, sin importar, sin duplicar.': '. No exporting, no importing, no duplicating.',
+      'Informes a la medida con asistencia humana — lo que la competencia no tiene.': 'Custom reports with human assistance — what the competition doesn’t have.',
+      // Sección 03
+      '03 — Por qué Prep! y no otra': '03 — Why Prep! and not another',
+      'Otros venden': 'Others sell',
+      'Prep! viene de la cocina.': 'Prep! comes from the kitchen.',
+      'Facturación electrónica nativa': 'Native e-invoicing',
+      'Otros sistemas no entienden la facturación local de cada país. Prep! se adapta a la regulación tributaria de tu mercado desde el primer ticket.': 'Other systems don’t understand each country’s local invoicing. Prep! adapts to your market’s tax regulations from the first ticket.',
+      '0% en reservas. Siempre.': '0% on reservations. Always.',
+      'Otras plataformas te cobran por cubierto reservado. Acá no. Tus reservas son tu dato, no el modelo de negocio del software.': 'Other platforms charge you per booked cover. Not here. Your reservations are your data, not the software’s business model.',
+      'Multi-sede de verdad': 'True multi-location',
+      'Si tienes 6 sedes, comparas. Si tienes 12, optimizas. Prep! fue diseñado para cadenas desde la primera línea de código, no parchado después.': 'With 6 locations you compare. With 12 you optimize. Prep! was designed for chains from the first line of code, not patched in later.',
+      'Habla como tú': 'Speaks your language',
+      'Tu equipo no aprende "POS terminal". Lee "Caja". No abre "KDS". Abre "Línea". El software respeta el oficio porque el que lo hizo estuvo en el oficio.': 'Your team doesn’t learn “POS terminal.” They read “Caja.” They don’t open “KDS.” They open “Línea.” The software respects the craft because the people who built it lived it.',
+      // Sección 04
+      '04 — Quién lo hizo': '04 — Who built it',
+      'Lo hicimos': 'We built it',
+      'desde la cocina.': 'from the kitchen.',
+      'Pensamos tanto en la funcionalidad y arquitectura del sistema que teníamos que equipararlo a nivel de experiencia de usuario y nos dio tiempo de divertirnos con el diseño. Disfrútalo.': 'We thought so hard about the system’s functionality and architecture that we had to match it on user experience — and we even found time to have fun with the design. Enjoy it.',
+      'No es solo un software para restaurantes, es un operador completo.': 'It’s not just restaurant software, it’s a complete operator.',
+      '"No es \'tech para restaurantes\'. Es operación con software adentro."': '“It’s not ‘tech for restaurants.’ It’s operations with software inside.”',
+      'Trayectoria · El equipo detrás': 'Track record · The team behind it',
+      'Directores y VP de Alimentos y Bebidas': 'Food & Beverage Directors and VPs',
+      'Liderazgo ejecutivo en operaciones de F&B a escala internacional.': 'Executive leadership in F&B operations at international scale.',
+      'Especialistas en operación de hoteles y restaurantes a nivel global': 'Specialists in hotel and restaurant operations worldwide',
+      'Experiencia directa en cocinas, salones, recepciones y back-of-house.': 'Hands-on experience in kitchens, dining rooms, front desks and back-of-house.',
+      'Jefes de compras y Cost Controller': 'Purchasing managers and Cost Controllers',
+      'Control de costos, negociación con proveedores, optimización de márgenes.': 'Cost control, supplier negotiation, margin optimization.',
+      'Más de 15 años de experiencia en la industria': 'Over 15 years of industry experience',
+      'Restaurantes, hoteles, catering, franquicias, dark kitchens.': 'Restaurants, hotels, catering, franchises, dark kitchens.',
+      // Marquees
+      'Facturación nativa · 0% fee en reservas · Multi-sede de verdad · En tu idioma · Hecho por operadores · Plug and play ·': 'Native invoicing · 0% fee on reservations · True multi-location · In your language · Built by operators · Plug and play ·',
+      '¡Pedir demo! · ¡Pedir demo! · ¡Pedir demo! · ¡Pedir demo! ·': 'Request a demo! · Request a demo! · Request a demo! · Request a demo! ·',
+      // Demo form
+      'Muéstranos tu operación.': 'Show us your operation.',
+      'Te mostramos': 'We’ll show you',
+      'cómo se ve': 'what it looks like',
+      'con Prep!': 'with Prep!',
+      'Te llamamos en 24 horas. Demo personalizada según tu cantidad de sedes y tipo de operación. Sin compromiso. Sin sales pitch.': 'We’ll call you within 24 hours. A personalized demo based on your number of locations and type of operation. No commitment. No sales pitch.',
+      'Nombre': 'Name',
+      'Restaurante': 'Restaurant',
+      'Cantidad de sedes': 'Number of locations',
+      'Seleccionar...': 'Select...',
+      '1 sede': '1 location',
+      '2-3 sedes': '2-3 locations',
+      '4-10 sedes': '4-10 locations',
+      'Más de 10': 'More than 10',
+      'Tu rol': 'Your role',
+      'Dueño / Founder': 'Owner / Founder',
+      'Director / Gerente de Operaciones': 'Director / Operations Manager',
+      'Chef Ejecutivo': 'Executive Chef',
+      'IT / Tecnología': 'IT / Technology',
+      'Otro': 'Other',
+      'Ciudad': 'City',
+      'Te contactamos en 24h. No spam, no newsletter, no mover info a terceros.': 'We’ll contact you within 24h. No spam, no newsletter, no sharing your info with third parties.',
+      '¡Servido!': 'Served!',
+      'Tu pedido está en línea. Te contactamos en las próximas 24 horas por WhatsApp.': 'Your request is in. We’ll reach out within the next 24 hours via WhatsApp.',
+      'O escríbenos directo': 'Or message us directly',
+      // Footer
+      'Producto': 'Product',
+      'Compañía': 'Company',
+      'Casos de éxito': 'Case studies',
+      'Empezar': 'Get started',
+      'WhatsApp directo': 'WhatsApp direct',
+      'Documentación': 'Documentation',
+      '© 2026 Prep! · Hecho por operadores, para operadores.': '© 2026 Prep! · Built by operators, for operators.',
+      'Términos': 'Terms',
+      'Privacidad': 'Privacy',
+      'Soporte 24h': '24/7 Support'
+    };
+    // Atributos traducibles (placeholder / title)
+    const ATTR_EN = {
+      'Tu nombre': 'Your name',
+      'Nombre del restaurante o cadena': 'Restaurant or chain name',
+      'Ej: Lima, CDMX, Bogotá, BsAs': 'e.g. Lima, CDMX, Bogotá, BsAs',
+      'Soporte 24 horas': '24-hour support'
+    };
+    const ATTR_NAMES = ['placeholder', 'aria-label', 'title', 'alt'];
+    const SKIP_TAGS = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1 };
+    let snapped = false;
+
+    const norm = s => s.trim().replace(/\s+/g, ' ');
+    const isIcon = el => el && el.classList && el.classList.contains('material-symbols-outlined');
+
+    function eachText(cb) {
+      const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(n) {
+          const p = n.parentNode;
+          if (!p || SKIP_TAGS[p.nodeName] || isIcon(p)) return NodeFilter.FILTER_REJECT;
+          if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      let n; while ((n = w.nextNode())) cb(n);
+    }
+
+    function snapshot() {
+      if (snapped) return;
+      eachText(n => { n.__es = n.nodeValue; });
+      ATTR_NAMES.forEach(a => {
+        document.querySelectorAll('[' + a + ']').forEach(el => {
+          el.setAttribute('data-es-' + a, el.getAttribute(a));
+        });
+      });
+      snapped = true;
+    }
+
+    window.setLang = function (lang) {
+      snapshot();
+      document.documentElement.setAttribute('lang', lang);
+      document.body.classList.toggle('lang-en', lang === 'en');
+      document.querySelectorAll('.lang-toggle button').forEach(b => {
+        b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang);
+      });
+      eachText(n => {
+        const orig = n.__es; if (orig == null) return;
+        if (lang === 'en') {
+          const t = EN[norm(orig)];
+          if (t != null) {
+            const lead = (orig.match(/^\s*/) || [''])[0];
+            const trail = (orig.match(/\s*$/) || [''])[0];
+            n.nodeValue = lead + t + trail;
+          }
+        } else {
+          n.nodeValue = orig;
+        }
+      });
+      ATTR_NAMES.forEach(a => {
+        document.querySelectorAll('[data-es-' + a + ']').forEach(el => {
+          const es = el.getAttribute('data-es-' + a);
+          if (lang === 'en') { const t = ATTR_EN[norm(es)]; if (t != null) el.setAttribute(a, t); }
+          else el.setAttribute(a, es);
+        });
+      });
+      try { localStorage.setItem('prep_lang', lang); } catch (e) {}
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      let l = 'es';
+      try { l = localStorage.getItem('prep_lang') || 'es'; } catch (e) {}
+      if (l !== 'es') setLang(l); else snapshot();
     });
-    // Update nav demo button text
-    const demoBtns = document.querySelectorAll('[data-demo-btn]');
-    demoBtns.forEach(btn => {
-      btn.textContent = lang === 'en' ? 'Request demo' : 'Pedir demo';
-    });
-  }
+  })();
 
 
   // === Logo color animation: SPLATTERS QUE SE ACUMULAN inside letters ===
