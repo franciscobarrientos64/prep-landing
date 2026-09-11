@@ -1199,7 +1199,7 @@
     <div class="text-center mt-10">
       <p class="text-white/70 text-sm font-mono tracking-wider uppercase mb-4">O escríbenos directo</p>
       <div class="flex justify-center gap-4">
-        <a href="https://wa.me/51999999999" target="_blank" class="social-link" style="background:#25D366;color:#fff;border-color:#000;" aria-label="WhatsApp">
+        <a href="https://wa.me/51974826828?text=Hola%2C%20quiero%20una%20demo%20de%20Prep" target="_blank" class="social-link" style="background:#25D366;color:#fff;border-color:#000;" aria-label="WhatsApp">
           <span class="material-symbols-outlined">chat</span>
         </a>
         <a href="mailto:hola@prep.rest" class="social-link" style="background:#fff;" aria-label="Email">
@@ -1263,7 +1263,7 @@
         <div class="flex gap-3 mt-6">
           <a href="#" class="social-link" aria-label="Instagram"><span class="material-symbols-outlined text-lg">photo_camera</span></a>
           <a href="#" class="social-link" aria-label="LinkedIn"><span class="material-symbols-outlined text-lg">work</span></a>
-          <a href="https://wa.me/51999999999" class="social-link" aria-label="WhatsApp"><span class="material-symbols-outlined text-lg">chat</span></a>
+          <a href="https://wa.me/51974826828?text=Hola%2C%20quiero%20una%20demo%20de%20Prep" class="social-link" aria-label="WhatsApp"><span class="material-symbols-outlined text-lg">chat</span></a>
         </div>
       </div>
 
@@ -1271,7 +1271,7 @@
         <p class="text-xs font-bold tracking-widest uppercase font-mono mb-4 text-ink/60">Empezar</p>
         <ul class="space-y-2 text-sm">
           <li><a href="#demo-form" class="hover:text-primary">Pedir demo</a></li>
-          <li><a href="#" class="hover:text-primary">WhatsApp directo</a></li>
+          <li><a href="https://wa.me/51974826828?text=Hola%2C%20quiero%20una%20demo%20de%20Prep" target="_blank" rel="noopener" class="hover:text-primary">WhatsApp directo</a></li>
           <li><a href="#" class="hover:text-primary">Documentación</a></li>
         </ul>
         <button onclick="document.getElementById('demo-form').scrollIntoView({behavior:'smooth'})" class="mt-6 bg-secondary text-white btn-brutal px-6 py-3 text-sm">
@@ -1294,7 +1294,7 @@
 <!-- ============================================
      SUPPORT 24H BADGE
      ============================================ -->
-<a href="https://wa.me/51999999999" target="_blank" class="support-badge" title="Soporte 24 horas">
+<a href="https://wa.me/51974826828?text=Hola%2C%20quiero%20una%20demo%20de%20Prep" target="_blank" class="support-badge" title="Soporte 24 horas">
   <span class="material-symbols-outlined">support_agent</span>
   <span>Soporte 24h</span>
   <span class="dot-atom" style="width:8px;height:8px;"></span>
@@ -1785,14 +1785,32 @@
   }
 
   // === Form submit (placeholder — en producción esto conecta a Supabase) ===
-  function handleSubmit(e) {
+  // Las solicitudes de demo se guardan en wa_leads (Supabase), la misma tabla
+  // donde el bot de WhatsApp registra sus leads. anon solo puede insertar.
+  const LEADS_URL = 'https://jmkvphayyhwzootlybde.supabase.co/rest/v1/wa_leads';
+  const LEADS_KEY = 'sb_publishable_0-znERv1Ok0Dw-Re44eksw_QAOqDc8M';
+  async function handleSubmit(e) {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.target));
-    console.log('[Prep! lead]', data);
-    // TODO: POST a Supabase → tabla prep_leads
-    document.getElementById('form-success').classList.remove('hidden');
-    e.target.querySelector('button[type="submit"]').textContent = '✓ Recibido';
-    setTimeout(() => e.target.reset(), 400);
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    const d = Object.fromEntries(new FormData(form));
+    const mensaje = `Demo desde prep.rest · ${d.nombre || ''} · ${d.restaurante || ''} · ${d.email || ''} · ${d.sedes || ''} sedes · ${d.cargo || ''} · ${d.ciudad || ''}`.slice(0, 2000);
+    btn.disabled = true; btn.textContent = 'Enviando…';
+    try {
+      const r = await fetch(LEADS_URL, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', apikey: LEADS_KEY, authorization: `Bearer ${LEADS_KEY}`, prefer: 'return=minimal' },
+        body: JSON.stringify({ telefono: String(d.whatsapp || '').trim(), marca: 'prep', mensaje, source: 'web-prep' }),
+      });
+      if (!r.ok) throw new Error(r.status);
+      document.getElementById('form-success').classList.remove('hidden');
+      btn.textContent = '✓ Recibido';
+      setTimeout(() => form.reset(), 400);
+    } catch (err) {
+      console.error('[Prep! lead]', err);
+      btn.disabled = false; btn.textContent = 'Pedir demo  →';
+      if (confirm('No pudimos enviar el formulario. ¿Nos escribes por WhatsApp?')) window.open('https://wa.me/51974826828?text=Hola%2C%20quiero%20una%20demo%20de%20Prep', '_blank');
+    }
   }
   window.handleSubmit = handleSubmit;
 
